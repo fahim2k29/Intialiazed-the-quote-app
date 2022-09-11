@@ -14,6 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::post('get-access-token', 'App\Http\Controllers\Api\UserController@getAccessToken')->name('get_access_token');
+
+//get quote
+Route::group(['middleware' => 'apiKey'], function () {
+    Route::get('quote-data', 'App\Http\Controllers\Api\QuoteController@quoteData')->name('quote_data');
 });

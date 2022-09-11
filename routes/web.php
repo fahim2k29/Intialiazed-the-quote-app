@@ -20,14 +20,3 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-Route::group(['prefix' => 'apikey'], function () {
-    Route::post('get-access-token', 'App\Http\Controllers\Api\UserController@getAccessToken')->name('get_access_token');
-});
-
-
-Route::group(['middleware' => 'apikey','prefix'=>'apikey'], function () {
-    Route::get('quote-data', 'App\Http\Controllers\Api\QuoteController@quoteData')->name('quote_data');
-});
-//Route::get('/users', 'App\Http\Controllers\UserController@index');

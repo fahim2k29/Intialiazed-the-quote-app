@@ -6,19 +6,14 @@ use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 
-class Apikey
+class ApiKey
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
-     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
-     */
+
     public function handle(Request $request, Closure $next)
     {
         $token = $request->bearerToken();
         $authorizedApiUser = User::query()->where('access_token',$token)->first();
+
         if($token != null && $authorizedApiUser){
             return $next($request);
         } else{
